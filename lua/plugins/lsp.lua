@@ -14,38 +14,20 @@ return {
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
-        local builtin = require 'telescope.builtin'
+        local fzf = require 'fzf-lua'
 
         -- Jump to the definition of the word under your cursor.
-        --  To jump back, press <C-t>.
-        map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-        map('gr', builtin.lsp_references, '[G]oto [R]eferences')
-        map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
-        map('<leader>D', builtin.lsp_type_definitions, 'Type [D]efinition')
-        map('<leader>fsd', builtin.lsp_document_symbols, '[F]ind [S]ymbols in [D]ocument')
-        map('<leader>fsw', builtin.lsp_dynamic_workspace_symbols, '[F]ind [S]ymbols in [W]orkspace')
-        map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        -- To jump back, press <C-t>.
+        map('gd', '<cmd>FzfLua lsp_definitions jump_to_single_result=true<cr>', '[G]oto [D]efinition')
+        map('gr', fzf.lsp_references, '[G]oto [R]eferences')
+        map('gI', '<cmd>FzfLua lsp_implementations jump_to_single_result=true<cr>', '[G]oto [I]mplementation')
+        map('<leader>D', '<cmd>FzfLua lsp_typedefs jump_to_single_result=true<cr>', 'Type [D]efinition')
+        map('<leader>fsd', fzf.lsp_document_symbols, '[F]zf: [S]ymbols: [D]ocument')
+        map('<leader>fsw', fzf.lsp_live_workspace_symbols, '[F]zf: [S]ymbols: [W]orkspace')
+        map('<leader>cr', vim.lsp.buf.rename, '[C]ode [R]ename')
         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
-        -- diagnostic
-        local signs = {
-          Error = ' ',
-          Warn = ' ',
-          Hint = ' ',
-          Info = ' ',
-        }
-        for type, icon in pairs(signs) do
-          local hl = 'DiagnosticSign' .. type
-          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-        end
-        vim.diagnostic.config { severity_sort = true }
-        vim.keymap.set('n', '<A-d>', vim.diagnostic.open_float, { desc = '[D]iagnostic Float' })
-        vim.keymap.set('n', '<leader>dl', builtin.diagnostics, { desc = '[D]iagnostic [L]ist' })
-        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-        --
 
         -- highlight references under cursor (and remove when moving off)
         local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -90,6 +72,8 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+    require('mason').setup()
+
     require('mason-tool-installer').setup {
       ensure_installed = {
         'lua_ls',
@@ -98,7 +82,6 @@ return {
     }
 
     local servers = {
-      gleam = {},
       jdtls = {},
       marksman = {},
       lua_ls = {
@@ -107,8 +90,7 @@ return {
         },
       },
     }
-
-    require('mason').setup()
+    require('lspconfig').gleam.setup {}
 
     require('mason-lspconfig').setup {
       handlers = {

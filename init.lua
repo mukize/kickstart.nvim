@@ -11,6 +11,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- diagnostic
+local signs = {
+  Error = ' ',
+  Warn = ' ',
+  Hint = ' ',
+  Info = ' ',
+}
+for type, icon in pairs(signs) do
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+end
+vim.diagnostic.config { severity_sort = true, underline = false }
+vim.keymap.set('n', '<A-d>', vim.diagnostic.open_float, { desc = '[D]iagnostic Float' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+--
+
 require('lazy').setup({
 
   'tpope/vim-sleuth',
@@ -26,7 +43,7 @@ require('lazy').setup({
     'folke/tokyonight.nvim',
     priority = 1000,
     init = function()
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight-storm'
       vim.cmd.hi 'Comment gui=none'
     end,
   },

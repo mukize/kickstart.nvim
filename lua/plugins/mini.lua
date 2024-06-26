@@ -5,13 +5,13 @@ return {
     require('mini.surround').setup()
     require('mini.pairs').setup()
 
-    -- splitjoin
+    --- splitjoin
     local splitjoin = require 'mini.splitjoin'
     splitjoin.setup { mappings = { toggle = '' } }
     vim.keymap.set('n', '<leader>cs', splitjoin.toggle, { desc = '[C]ode: [S]plitjoin' })
-    --
+    ---
 
-    -- mini files
+    --- mini files
     local files = require 'mini.files'
     local files_prefix = function(fs_entry)
       local icon, group = files.default_prefix(fs_entry)
@@ -21,15 +21,15 @@ return {
     vim.keymap.set('n', '<Leader>ne', function()
       require('mini.files').open(vim.api.nvim_buf_get_name(0))
     end, { desc = '[N]avigation [E]xplorer' })
-    --
+    ---
 
-    -- statusline
+    --- statusline
     local statusline = require 'mini.statusline'
     statusline.setup {
       use_icons = vim.g.have_nerd_font,
       content = {
         active = function()
-          local filename = '%f%m%r'
+          local filename = '%f %m %r'
           local fileinfo = statusline.section_fileinfo { trunc_width = 9999 }
           local search = statusline.section_searchcount { trunc_width = 75 }
           local diagnostics = statusline.section_diagnostics {
@@ -53,6 +53,6 @@ return {
         end,
       },
     }
-    --
+    ---
   end,
 }

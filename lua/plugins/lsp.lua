@@ -4,8 +4,9 @@ return {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'stevearc/dressing.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0 } } } },
-    { 'folke/neodev.nvim', opts = {} },
+    { 'folke/lazydev.nvim', opts = {} },
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -14,17 +15,17 @@ return {
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
-        local fzf = require 'fzf-lua'
 
         -- Jump to the definition of the word under your cursor.
         -- To jump back, press <C-t>.
-        map('gd', '<cmd>FzfLua lsp_definitions jump_to_single_result=true<cr>', '[G]oto [D]efinition')
-        map('gr', fzf.lsp_references, '[G]oto [R]eferences')
-        map('gI', '<cmd>FzfLua lsp_implementations jump_to_single_result=true<cr>', '[G]oto [I]mplementation')
-        map('<leader>D', '<cmd>FzfLua lsp_typedefs jump_to_single_result=true<cr>', 'Type [D]efinition')
-        map('<leader>fsd', fzf.lsp_document_symbols, '[F]zf: [S]ymbols: [D]ocument')
-        map('<leader>fsw', fzf.lsp_live_workspace_symbols, '[F]zf: [S]ymbols: [W]orkspace')
-        map('<leader>cr', vim.lsp.buf.rename, '[C]ode [R]ename')
+        map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+        map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+        map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+        map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+        map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+        map('<leader>cr', vim.lsp.buf.rename, '[R]e[n]ame')
+
         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -82,6 +83,7 @@ return {
     }
 
     local servers = {
+      jsonls = {},
       jdtls = {},
       marksman = {},
       lua_ls = {

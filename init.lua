@@ -2,7 +2,7 @@ require 'options'
 require 'keymaps'
 require 'lazy_init'
 
--- Highlight when yanking (copying) text
+--- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -10,8 +10,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+---
 
--- diagnostic
+--- diagnostic
 local signs = {
   Error = ' ',
   Warn = ' ',
@@ -22,11 +23,11 @@ for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
 end
-vim.diagnostic.config { severity_sort = true, underline = false }
+vim.diagnostic.config { severity_sort = true }
 vim.keymap.set('n', '<A-d>', vim.diagnostic.open_float, { desc = '[D]iagnostic Float' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
---
+---
 
 require('lazy').setup({
 
@@ -43,7 +44,7 @@ require('lazy').setup({
     'folke/tokyonight.nvim',
     priority = 1000,
     init = function()
-      vim.cmd.colorscheme 'tokyonight-storm'
+      vim.cmd.colorscheme 'tokyonight-night'
       vim.cmd.hi 'Comment gui=none'
     end,
   },
@@ -83,6 +84,7 @@ require('lazy').setup({
 
   {
     'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     build = ':TSUpdate',
     opts = {
       ensure_installed = { 'bash', 'diff', 'html', 'lua', 'luadoc', 'markdown' },
@@ -90,6 +92,24 @@ require('lazy').setup({
       highlight = { enable = true },
       indent = { enable = true },
       treesitter_context = { enable = true },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ['af'] = { query = '@function.outer', desc = 'Select outer part of a function region' },
+            ['if'] = { query = '@function.inner', desc = 'Select inner part of a function region' },
+            ['ac'] = { query = '@class.outer', desc = 'Select outer part of a class region' },
+            ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+          },
+          selection_modes = {
+            ['@parameter.outer'] = 'v',
+            ['@function.outer'] = 'V',
+            ['@class.outer'] = '<c-v>',
+          },
+          include_surrounding_whitespace = true,
+        },
+      },
     },
     config = function(_, opts)
       -- Prefer git instead of curl in order to improve connectivity in some environments

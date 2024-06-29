@@ -24,6 +24,20 @@ return {
           theme = 'dropdown',
           previewer = false,
         },
+        buffers = {
+          mappings = {
+            n = {
+              ['<c-d>'] = require('telescope.actions').delete_buffer,
+              ['<M-j>'] = require('telescope.actions').move_selection_next,
+              ['<M-k>'] = require('telescope.actions').move_selection_previous,
+            },
+            i = {
+              ['<c-d>'] = require('telescope.actions').delete_buffer,
+              ['<M-j>'] = require('telescope.actions').move_selection_next,
+              ['<M-k>'] = require('telescope.actions').move_selection_previous,
+            },
+          },
+        },
       },
       extensions = {
         ['ui-select'] = {
@@ -37,7 +51,8 @@ return {
 
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch: [G]rep' })
-    vim.keymap.set('n', '<leader>sd', '<cmd>Telescope diagnostics theme=dropdown<cr>', { desc = '[S]earch: [D]iagnostics' })
+    vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch: [B]uffers' })
+    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch: [D]iagnostics' })
     vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[S]earch [F]iles' })
 
     vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it: [S]tatus' })

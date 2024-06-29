@@ -83,6 +83,8 @@ return {
     }
 
     local servers = {
+      html = {},
+      bashls = {},
       jsonls = {},
       jdtls = {},
       marksman = {},

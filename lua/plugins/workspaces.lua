@@ -3,11 +3,13 @@ return {
   config = function()
     local workspaces = require 'workspaces'
     workspaces.setup {
-      auto_open = true,
       hooks = {
-        open = {
-          'lua require("persistence").load()',
+        open_pre = {
+          "lua require('persistence').save()",
+          "lua require('persistence').stop()",
+          'silent %bdelete!',
         },
+        open = { 'lua require("persistence").load()' },
       },
     }
     vim.keymap.set('n', '<leader>wl', '<cmd>WorkspacesOpen<cr>', { desc = '[W]orkspaces: [L]ist' })

@@ -1,5 +1,5 @@
 return {
-  '/natecraddock/workspaces.nvim',
+  'natecraddock/workspaces.nvim',
   config = function()
     local workspaces = require 'workspaces'
     workspaces.setup {

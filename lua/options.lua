@@ -1,7 +1,7 @@
 vim.g.have_nerd_font = true
 
 vim.opt.number = true
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 
 vim.opt.mouse = 'a'
 vim.opt.showmode = false
@@ -26,7 +26,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 vim.opt.inccommand = 'split'
 
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 vim.opt.scrolloff = 10
 
@@ -34,6 +34,6 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.opt.title = true
-vim.opt.titlelen = 0 -- do not shorten title
+vim.opt.titlelen = 0
 vim.opt.titlestring = 'nv %t'
 vim.opt.conceallevel = 2

@@ -28,13 +28,9 @@ return {
           mappings = {
             n = {
               ['<c-d>'] = require('telescope.actions').delete_buffer,
-              ['<M-j>'] = require('telescope.actions').move_selection_next,
-              ['<M-k>'] = require('telescope.actions').move_selection_previous,
             },
             i = {
               ['<c-d>'] = require('telescope.actions').delete_buffer,
-              ['<M-j>'] = require('telescope.actions').move_selection_next,
-              ['<M-k>'] = require('telescope.actions').move_selection_previous,
             },
           },
         },
@@ -56,6 +52,6 @@ return {
     vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[S]earch [F]iles' })
 
     vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it: [S]tatus' })
-    vim.keymap.set('n', '<leader>gb', builtin.git_status, { desc = '[G]it: [S]tatus' })
+    vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it: [B]ranch' })
   end,
 }

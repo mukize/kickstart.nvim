@@ -28,7 +28,7 @@ return {
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
-    require 'snippets'
+    require("luasnip.loaders.from_snipmate").load()
 
     cmp.setup {
       snippet = {
@@ -38,12 +38,9 @@ return {
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
 
-      -- No, but seriously. Please read `:help ins-completion`, it is really good!
       mapping = cmp.mapping.preset.insert {
         ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<A-j>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<A-k>'] = cmp.mapping.select_prev_item(),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<CR>'] = cmp.mapping.confirm { select = true },
@@ -51,12 +48,12 @@ return {
 
         -- <c-l> will move you to the right of each of the expansion locations.
         -- <c-h> is similar, except moving you backwards.
-        ['<C-l>'] = cmp.mapping(function()
+        ['<c-l>'] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           end
         end, { 'i', 's' }),
-        ['<C-h>'] = cmp.mapping(function()
+        ['<c-h>'] = cmp.mapping(function()
           if luasnip.locally_jumpable(-1) then
             luasnip.jump(-1)
           end
@@ -64,6 +61,7 @@ return {
       },
       sources = {
         { name = 'nvim_lsp' },
+        { name = 'neorg' },
         { name = 'luasnip' },
         { name = 'path' },
       },

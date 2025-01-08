@@ -1,13 +1,16 @@
 return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
-  opts = {},
-  keys = {
-    { '<leader>c', group = '[C]ode' },
-    { '<leader>g', group = '[G]it' },
-    { '<leader>d', group = '[D]iagnostics' },
-    { '<leader>s', group = '[S]urrond' },
-    { '<leader>t', group = '[T]oggle' },
-    { '<leader>f', group = '[F]ind' },
-  },
+  opts = function()
+    require("which-key").add(
+      {
+        { '<leader>c', group = 'Code' },
+        { '<leader>g', group = 'Git' },
+        { '<leader>h', group = 'Harpoon' },
+        { '<leader>s', group = 'Search' },
+        { '<leader>t', group = 'Toggle' },
+        { '<leader>w', group = 'Workspaces' },
+      }
+    );
+  end,
 }

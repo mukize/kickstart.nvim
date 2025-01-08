@@ -4,25 +4,26 @@ return {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
     'stevearc/dressing.nvim',
-    { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0 } } } },
-    { 'folke/lazydev.nvim', opts = {} },
+    { 'j-hui/fidget.nvim',       opts = { notification = { window = { winblend = 0 } } } },
+    { 'folke/lazydev.nvim',      opts = {} },
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc)
-          vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc .. ' (LSP)' })
         end
 
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
         map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
         map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
         map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-        map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-        map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+        map('<leader>ss', require('telescope.builtin').lsp_document_symbols, '[S]earch: [S]ymbols')
+        map('<leader>sw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[S]earch: [W]orkspace Symbols')
 
-        map('<leader>cr', vim.lsp.buf.rename, '[R]e[n]ame')
+        map('<leader>cr', vim.lsp.buf.rename, '[C]ode: [R]ename')
+        map('<leader>ca', vim.lsp.buf.code_action, '[C]ode: [A]ctions')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
@@ -64,6 +65,12 @@ return {
     local server_configs = {
       lua_ls = { settings = { Lua = { completion = { callSnippet = 'Replace' } } } },
       jdtls = false,
+      omnisharp = { cmd = { vim.fn.stdpath('data') .. '/mason/bin/omnisharp' } },
+      phpactor = {
+        init_options = {
+          ["language_server_phpstan.enabled"] = true,
+        }
+      }
     }
 
     require('mason').setup()

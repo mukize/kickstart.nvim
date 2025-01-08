@@ -11,7 +11,7 @@ return {
       end,
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
-    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
   },
   config = function()
     require('telescope').setup {
@@ -24,14 +24,13 @@ return {
           theme = 'dropdown',
           previewer = false,
         },
+        colorschemes = {
+          enable_preview = true,
+        },
         buffers = {
           mappings = {
-            n = {
-              ['<c-d>'] = require('telescope.actions').delete_buffer,
-            },
-            i = {
-              ['<c-d>'] = require('telescope.actions').delete_buffer,
-            },
+            n = { ['<c-d>'] = require('telescope.actions').delete_buffer },
+            i = { ['<c-d>'] = require('telescope.actions').delete_buffer },
           },
         },
       },
@@ -49,9 +48,9 @@ return {
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch: [G]rep' })
     vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch: [B]uffers' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch: [D]iagnostics' })
-    vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[S]earch [F]iles' })
+    vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Find Files' })
 
-    vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it: [S]tatus' })
-    vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it: [B]ranch' })
+    -- vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it: [S]tatus' })
+    -- vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it: [B]ranch' })
   end,
 }

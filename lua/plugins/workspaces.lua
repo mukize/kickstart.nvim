@@ -1,18 +1,24 @@
 return {
-  { 'folke/persistence.nvim', event = 'BufReadPre', opts = {} },
+  -- { 'folke/persistence.nvim', event = 'BufReadPre', opts = {} },
+  {
+    'rmagatti/auto-session',
+    -- enabled = false,
+    lazy = false,
+
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+    }
+  },
   {
     'natecraddock/workspaces.nvim',
     config = function()
       local workspaces = require 'workspaces'
       workspaces.setup {
         hooks = {
-          open_pre = {
-            'lua require("persistence").save()',
-            '%bdelete',
-          },
-          open = function()
-            require('persistence').load()
-          end,
+          open_pre = { 'SessionSave', '%bdelete', },
+          open = { 'SessionRestore' },
         },
       }
       vim.keymap.set('n', '<leader>wl', '<cmd>WorkspacesOpen<cr>', { desc = '[W]orkspaces: [L]ist' })

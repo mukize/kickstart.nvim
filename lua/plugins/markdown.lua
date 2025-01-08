@@ -1,12 +1,20 @@
 return {
-  { 'jbyuki/nabla.nvim', ft = 'markdown' },
   { 'Kicamon/markdown-table-mode.nvim', ft = 'markdown' },
-  { '3rd/image.nvim', ft = 'markdown' },
   {
-    'lukas-reineke/headlines.nvim',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
-    ft = 'markdown',
-    opts = { markdown = { headline_highlights = false } },
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    opts = function()
+      local presets = require("markview.presets")
+      require("markview").setup({
+        headings = presets.headings.marker
+      })
+      vim.keymap.set("n", "<leader>tm", "<cmd>Markview<cr>", { desc = "[T]oggle [M]arkview" })
+    end
   },
   {
     'epwalsh/obsidian.nvim',
@@ -16,12 +24,13 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       workspaces = {
-        { name = 'personal', path = '~/obsidian-vaults/personal' },
-        { name = 'uni', path = '~/obsidian-vaults/uni' },
+        -- { name = 'personal', path = '~/obsidian-vaults/personal' },
+        -- { name = 'uni', path = '~/obsidian-vaults/uni' },
+        { name = 'hpc-wizards', path = '/mnt/c/Users/patri/obsidian-vaults/HPC_Wizards/' },
       },
       daily_notes = { folder = 'dailies', date_format = '%Y-%m-%d' },
       ui = {
-        enable = true, -- set to false to disable all additional syntax features
+        enable = false, -- set to false to disable all additional syntax features
         -- update_debounce = 200, -- update delay after a text change (in milliseconds)
         -- max_file_length = 5000, -- disable UI features for files with more than this many lines
         checkboxes = {

@@ -8,7 +8,7 @@ return {
     ----- splitjoin
     local splitjoin = require 'mini.splitjoin'
     splitjoin.setup { mappings = { toggle = '' } }
-    vim.keymap.set('n', '<leader>cs', splitjoin.toggle, { desc = '[C]ode: [S]plitjoin' })
+    vim.keymap.set('n', '<leader>cj', splitjoin.toggle, { desc = '[C]ode: Split/[J]oin Surronds' })
     -----
 
     ----- mini files
@@ -18,9 +18,9 @@ return {
       return icon .. ' ', group
     end
     files.setup { content = { prefix = files_prefix } }
-    vim.keymap.set('n', '<Leader>ne', function()
+    vim.keymap.set('n', '<Leader>e', function()
       require('mini.files').open(vim.api.nvim_buf_get_name(0))
-    end, { desc = '[N]avigation [E]xplorer' })
+    end, { desc = '[E]xplorer' })
     -----
 
     ----- statusline

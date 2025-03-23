@@ -64,7 +64,7 @@ return {
 
     local server_configs = {
       lua_ls = { settings = { Lua = { completion = { callSnippet = 'Replace' } } } },
-      jdtls = false,
+      -- jdtls = false,
       omnisharp = { cmd = { vim.fn.stdpath('data') .. '/mason/bin/omnisharp' } },
       phpactor = {
         init_options = {
@@ -85,5 +85,6 @@ return {
         require('lspconfig')[server_name].setup(server)
       end,
     }
+    require('lspconfig').gleam.setup({})
   end,
 }

@@ -1,22 +1,6 @@
 return {
   { 'Kicamon/markdown-table-mode.nvim', ft = 'markdown' },
   {
-    "OXY2DEV/markview.nvim",
-    lazy = false,
-
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
-    },
-    opts = function()
-      local presets = require("markview.presets")
-      require("markview").setup({
-        headings = presets.headings.marker
-      })
-      vim.keymap.set("n", "<leader>tm", "<cmd>Markview<cr>", { desc = "[T]oggle [M]arkview" })
-    end
-  },
-  {
     'epwalsh/obsidian.nvim',
     version = '*',
     lazy = true,

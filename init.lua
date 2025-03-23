@@ -39,8 +39,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 require('lazy').setup {
 
   'tpope/vim-sleuth',
-  { 'numToStr/Comment.nvim',    opts = {} },
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  { 'numToStr/Comment.nvim', opts = {} },
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },

@@ -3,6 +3,7 @@ return {
   dependencies = {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
+    'mfussenegger/nvim-jdtls',
     'stevearc/dressing.nvim',
     { 'j-hui/fidget.nvim',       opts = { notification = { window = { winblend = 0 } } } },
     { 'folke/lazydev.nvim',      opts = {} },
@@ -70,7 +71,8 @@ return {
         init_options = {
           ["language_server_phpstan.enabled"] = true,
         }
-      }
+      },
+      jdtls = false
     }
 
     require('mason').setup()

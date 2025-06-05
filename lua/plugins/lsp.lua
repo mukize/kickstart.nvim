@@ -87,6 +87,7 @@ return {
         require('lspconfig')[server_name].setup(server)
       end,
     }
-    require('lspconfig').gleam.setup({})
+    require('lspconfig').gleam.setup({ capabilities = capabilities })
+    require('lspconfig').sourcekit.setup { capabilities = capabilities }
   end,
 }

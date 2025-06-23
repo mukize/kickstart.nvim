@@ -24,10 +24,11 @@ return {
         map('<leader>sw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[S]earch: [W]orkspace Symbols')
 
         map('<leader>cr', vim.lsp.buf.rename, '[C]ode: [R]ename')
-        map('<leader>ca', vim.lsp.buf.code_action, '[C]ode: [A]ctions')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action,
+          { buffer = event.buf, desc = '[C]ode: [A]ctions (LSP)' })
         -- highlight references under cursor (and remove when moving off)
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.documentHighlightProvider then

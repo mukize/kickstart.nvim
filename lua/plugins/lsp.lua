@@ -77,17 +77,20 @@ return {
     }
 
     require('mason').setup()
-    require('mason-lspconfig').setup()
-    require('mason-lspconfig').setup_handlers {
-      function(server_name)
-        if server_configs[server_name] == false then
-          return
-        end
-        local server = server_configs[server_name] or {}
-        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-        require('lspconfig')[server_name].setup(server)
-      end,
-    }
+    require('mason-lspconfig').setup({
+      automatic_enable = true,
+      ensure_installed = {},
+      handlers = {
+        function(server_name)
+          if server_configs[server_name] == false then
+            return
+          end
+          local server = server_configs[server_name] or {}
+          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          require('lspconfig')[server_name].setup(server)
+        end,
+      }
+    })
     require('lspconfig').gleam.setup({ capabilities = capabilities })
     require('lspconfig').sourcekit.setup { capabilities = capabilities }
   end,

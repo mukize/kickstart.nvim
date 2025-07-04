@@ -86,6 +86,17 @@ require('lazy').setup {
       },
     },
     config = function(_, opts)
+      local treesitter = require("nvim-treesitter.configs")
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+      parser_config.gleam = {
+        install_info = {
+          url = "https://github.com/gleam-lang/tree-sitter-gleam",
+          revision = "main",
+          files = { "src/parser.c", "src/scanner.c" },
+        },
+        filetype = "gleam",
+      }
       -- Prefer git instead of curl in order to improve connectivity in some environments
       require('nvim-treesitter.install').prefer_git = true
       ---@diagnostic disable-next-line: missing-fields

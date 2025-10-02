@@ -1,5 +1,7 @@
 vim.g.have_nerd_font = true
 
+vim.o.winborder = "rounded"
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 

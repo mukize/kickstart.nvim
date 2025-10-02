@@ -16,12 +16,17 @@ return {
     priority = 1000,
     opts = {
       transparent = true,
-      floats = 'normal',
       on_highlights = telescopeHightlights,
       plugins = { markdown = true },
+      styles = {
+        sidebars = "transparent",
+        -- floats = 'normal',
+        floats = "transparent",
+      },
+      cache = false,
     },
     init = function()
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight-storm'
       -- vim.cmd.hi 'Comment gui=none'
     end,
   },

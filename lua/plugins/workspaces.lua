@@ -8,8 +8,7 @@ return {
     ---enables autocomplete for opts
     ---@module "auto-session"
     ---@type AutoSession.Config
-    opts = {
-    }
+    opts = {}
   },
   {
     'natecraddock/workspaces.nvim',
@@ -17,8 +16,8 @@ return {
       local workspaces = require 'workspaces'
       workspaces.setup {
         hooks = {
-          open_pre = { 'SessionSave', '%bdelete', },
-          open = { 'SessionRestore' },
+          open_pre = { 'AutoSession save', '%bdelete', },
+          open = { 'AutoSession restore' },
         },
       }
       vim.keymap.set('n', '<leader>wl', '<cmd>WorkspacesOpen<cr>', { desc = '[W]orkspaces: [L]ist' })

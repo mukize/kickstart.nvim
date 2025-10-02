@@ -10,7 +10,8 @@ return {
       workspaces = {
         -- { name = 'personal', path = '~/obsidian-vaults/personal' },
         -- { name = 'uni', path = '~/obsidian-vaults/uni' },
-        { name = 'hpc-wizards', path = '/mnt/c/Users/patri/obsidian-vaults/HPC_Wizards/' },
+        -- { name = 'hpc-wizards', path = '/mnt/c/Users/patri/obsidian-vaults/HPC_Wizards/' },
+        { name = 'everything', path = '~/Obsidian Vaults/Everything/' }
       },
       daily_notes = { folder = 'dailies', date_format = '%Y-%m-%d' },
       ui = {

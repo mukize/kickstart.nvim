@@ -22,7 +22,7 @@ return {
       pickers = {
         diagnostics = {
           theme = 'dropdown',
-          previewer = false,
+          previewer = true,
         },
         colorschemes = {
           enable_preview = true,

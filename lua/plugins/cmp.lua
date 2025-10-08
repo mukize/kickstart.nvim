@@ -1,4 +1,5 @@
-return {
+-- disabled
+local f = {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
@@ -66,10 +67,10 @@ return {
       },
       sources = {
         { name = 'nvim_lsp' },
-        { name = 'neorg' },
         { name = 'luasnip' },
         { name = 'path' },
       },
     }
   end,
 }
+return {}

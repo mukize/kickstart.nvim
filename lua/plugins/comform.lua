@@ -34,6 +34,21 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       php = { 'pint' },
+      nix = { 'alejandra' },
+      typescript = {
+        -- 'prettier',
+        filter = function(client)
+          return client.name == "eslint"
+        end,
+        stop_after_first = true
+      },
+      typescriptreact = {
+        -- 'prettier',
+        filter = function(client)
+          return client.name == "eslint"
+        end,
+        stop_after_first = true
+      },
     },
   },
 }

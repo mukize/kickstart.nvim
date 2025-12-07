@@ -65,26 +65,6 @@ return {
       lua_ls = { settings = { Lua = { completion = { callSnippet = 'Replace' } } } },
       omnisharp = { cmd = { vim.fn.stdpath('data') .. '/mason/bin/omnisharp' } },
       phpactor = { init_options = { ["language_server_phpstan.enabled"] = true } },
-      ts_ls = {
-        root_markers = { 'tsconfig.json', 'package.json' },
-        root_dir = function(fname, ondir)
-          local root = require("lspconfig.util").root_pattern('tsconfig.json', 'package.json')(fname)
-          if root then
-            ondir(root)
-          end
-        end,
-        single_file_support = false
-      },
-      denols = {
-        -- root_markers = { 'deno.json', 'deno.jsonc' },
-        root_dir = function(fname, ondir)
-          local root = require("lspconfig.util").root_pattern('deno.json', 'deno.jsonc', 'import_map.json')(fname)
-          if root then
-            ondir(root)
-          end
-        end,
-        single_file_support = false
-      },
     }
 
     for server_name, server_config in pairs(server_configs) do

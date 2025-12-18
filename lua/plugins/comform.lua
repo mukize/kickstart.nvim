@@ -35,6 +35,7 @@ return {
       lua = { 'stylua' },
       php = { 'pint' },
       nix = { 'alejandra' },
+      hs = { 'fourmolu' },
       typescript = {
         -- 'prettier',
         filter = function(client)

@@ -3,6 +3,7 @@ return {
   dependencies = {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
+    "jay-babu/mason-nvim-dap.nvim",
     'mfussenegger/nvim-jdtls',
     'stevearc/dressing.nvim',
     { 'j-hui/fidget.nvim',       opts = { notification = { window = { winblend = 0 } } } },
@@ -62,16 +63,19 @@ return {
     })
 
     local server_configs = {
-      lua_ls = { settings = { Lua = { completion = { callSnippet = 'Replace' } } } },
+      lua_ls = { cmd = { "lua-language-server" }, settings = { Lua = { completion = { callSnippet = 'Replace' } } } },
       omnisharp = { cmd = { vim.fn.stdpath('data') .. '/mason/bin/omnisharp' } },
       phpactor = { init_options = { ["language_server_phpstan.enabled"] = true } },
+      -- hls = { cmd = { 'haskell-language-server-wrapper', '--lsp' } },
     }
 
     for server_name, server_config in pairs(server_configs) do
       vim.lsp.config(server_name, server_config)
+      vim.lsp.enable(server_name)
     end
 
     require('mason').setup()
     require('mason-lspconfig').setup({ automatic_enable = true })
+    require('mason-nvim-dap').setup()
   end,
 }

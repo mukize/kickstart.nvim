@@ -4,7 +4,7 @@ return {
     "mfussenegger/nvim-dap",
     "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
-    "williamboman/mason.nvim"
+    "williamboman/mason.nvim",
   },
   config = function()
     local dap, dapui = require("dap"), require("dapui")
@@ -14,12 +14,12 @@ return {
     vim.keymap.set({ 'n', 'v' }, '<leader>?', function()
       dapui.eval(nil, { enter = true })
     end, { desc = 'DAP: Toggle Breakpoint' })
-    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'DAP: Toggle Breakpoint' })
+    vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'DAP: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>dd', dap.continue, { desc = 'DAP: Continue' })
     -- vim.keymap.set('n', '<leader>dq', dap.disconnect, { desc = 'DAP: Stop' })
-    vim.keymap.set('n', '<leader>do', dap.step_over, { desc = 'DAP: Step Over' })
-    vim.keymap.set('n', '<leader>ds', dap.step_into, { desc = 'DAP: Step Into' })
-    vim.keymap.set('n', '<leader>dp', dap.step_back, { desc = 'DAP: Step Back' })
+    vim.keymap.set('n', '<leader>dk', dap.step_over, { desc = 'DAP: Step Over' })
+    vim.keymap.set('n', '<leader>dl', dap.step_into, { desc = 'DAP: Step Into' })
+    vim.keymap.set('n', '<leader>dj', dap.step_back, { desc = 'DAP: Step Back' })
     vim.keymap.set('n', '<leader>dr', dap.restart, { desc = 'DAP: Restart' })
     vim.keymap.set('n', '<leader>du', dapui.toggle, { desc = 'DAP: UI' })
 

@@ -34,7 +34,8 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       php = { 'pint' },
-      nix = { 'alejandra' },
+      nix = { 'nixpkgs-fmt' },
+      c = { 'clang-format' },
       hs = { 'fourmolu' },
       typescript = {
         -- 'prettier',

@@ -66,6 +66,7 @@ return {
       lua_ls = { cmd = { "lua-language-server" }, settings = { Lua = { completion = { callSnippet = 'Replace' } } } },
       omnisharp = { cmd = { vim.fn.stdpath('data') .. '/mason/bin/omnisharp' } },
       phpactor = { init_options = { ["language_server_phpstan.enabled"] = true } },
+      clangd = {},
       -- hls = { cmd = { 'haskell-language-server-wrapper', '--lsp' } },
     }
 

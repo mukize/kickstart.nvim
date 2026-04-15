@@ -38,4 +38,4 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.opt.title = true
 vim.opt.titlelen = 0
 vim.opt.titlestring = 'nv %t'
-vim.opt.conceallevel = 2
+-- vim.opt.conceallevel = 2

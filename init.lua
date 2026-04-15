@@ -58,10 +58,11 @@ require('lazy').setup {
   { 'numToStr/Comment.nvim', opts = {} },
   {
     'nvim-treesitter/nvim-treesitter',
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    branch = 'main',
+    dependencies = { { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' } },
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'diff', 'html', 'lua', 'luadoc', 'markdown' },
+      -- ensure_installed = { 'bash', 'diff', 'html', 'lua', 'luadoc', 'markdown' },
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
@@ -86,7 +87,7 @@ require('lazy').setup {
       },
     },
     config = function(_, opts)
-      local treesitter = require("nvim-treesitter.configs")
+      local treesitter = require("nvim-treesitter")
       local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
       parser_config.gleam = {

@@ -67,13 +67,17 @@ return {
       omnisharp = { cmd = { vim.fn.stdpath('data') .. '/mason/bin/omnisharp' } },
       phpactor = { init_options = { ["language_server_phpstan.enabled"] = true } },
       clangd = {},
+      marksman = { env = { DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1" } }
       -- hls = { cmd = { 'haskell-language-server-wrapper', '--lsp' } },
     }
+
 
     for server_name, server_config in pairs(server_configs) do
       vim.lsp.config(server_name, server_config)
       vim.lsp.enable(server_name)
     end
+
+    vim.lsp.enable('tinymist')
 
     require('mason').setup()
     require('mason-lspconfig').setup({ automatic_enable = true })

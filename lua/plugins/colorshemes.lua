@@ -17,7 +17,6 @@ return {
     opts = {
       transparent = true,
       on_highlights = telescopeHightlights,
-      plugins = { markdown = true },
       styles = {
         sidebars = "transparent",
         -- floats = 'normal',
@@ -26,7 +25,8 @@ return {
       cache = false,
     },
     init = function()
-      vim.cmd.colorscheme 'tokyonight-storm'
+      vim.cmd.colorscheme 'catppuccin-macchiato'
+      -- vim.cmd.colorscheme 'tokyonight-storm'
       -- vim.cmd.hi 'Comment gui=none'
     end,
   },
@@ -36,7 +36,31 @@ return {
     priority = 1000,
     opts = {
       transparent_background = true,
-      show_end_of_buffer = true
+      show_end_of_buffer = true,
+      float = {
+        transparent = true,
+        solid = true, -- use solid styling for floating windows, see |winborder|
+      },
+      auto_integrations = true,
+      custom_highlights = function(colors)
+        return {
+          -- Comment = { fg = colors.flamingo },
+          -- TabLineSel = { bg = colors.pink },
+          -- CmpBorder = { fg = colors.surface2 },
+          -- Pmenu = { bg = colors.none },
+          ["@property"] = { fg = colors.sky },
+          ["@markup.italic"] = { fg = colors.flamingo }
+        }
+      end
+    }
+  },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    opts = {
+      styles = {
+        transparency = true,
+      },
     }
   }
 }

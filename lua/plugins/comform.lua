@@ -37,6 +37,7 @@ return {
       nix = { 'nixpkgs-fmt' },
       c = { 'clang-format' },
       hs = { 'fourmolu' },
+      py = { 'ruff' },
       typescript = {
         -- 'prettier',
         filter = function(client)

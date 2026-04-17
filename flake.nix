@@ -18,11 +18,8 @@
           buildInputs = with pkgs; [
             # lua-language-server
             # luarocks
+            stylua
           ];
-          # LUA = "${pkgs.lua}";
-          shellHook = ''
-            # luarocks config variables.LUA_INCDIR ${pkgs.lua5}/include
-          '';
         };
       }
     );

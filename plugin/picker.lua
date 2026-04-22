@@ -15,6 +15,7 @@ local epick_lsp = function(scope)
     epick.pickers.lsp { scope = scope }
   end
 end
+
 vim.keymap.set('n', 'gd', function()
   epick.pickers.lsp { scope = 'definition' }
 end, { desc = '[G]oto [D]efinition' })

@@ -9,6 +9,7 @@ local pick = require 'mini.pick'
 vim.keymap.set('n', '<leader>sg', pick.builtin.grep_live, { desc = '[S]earch: [G]rep' })
 vim.keymap.set('n', '<leader>sb', pick.builtin.buffers, { desc = '[S]earch: [B]uffers' })
 vim.keymap.set('n', '<leader><leader>', pick.builtin.files, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>r', pick.builtin.resume, { desc = 'Resume Picker' })
 
 local epick_lsp = function(scope)
   return function()
@@ -25,4 +26,5 @@ vim.keymap.set('n', 'gI', epick_lsp 'implementation', { desc = '[G]oto [I]mpleme
 vim.keymap.set('n', '<leader>D', epick_lsp 'type_definition', { desc = 'Type [D]efinition' })
 vim.keymap.set('n', '<leader>ss', epick_lsp 'document_symbol', { desc = '[S]earch: [S]ymbols' })
 vim.keymap.set('n', '<leader>sw', epick_lsp 'workspace_symbol', { desc = '[S]earch: [W]orkspace Symbols' })
+vim.keymap.set('n', '<leader>sd', epick.pickers.diagnostic, { desc = 'Search Diagnostics' })
 vim.keymap.set('n', 'gD', epick_lsp 'declaration', { desc = '[G]oto [D]eclaration' })

@@ -57,6 +57,7 @@ local server_configs = {
   phpactor = { init_options = { ['language_server_phpstan.enabled'] = true } },
   clangd = {},
   marksman = { env = { DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = '1' } },
+  clojure_lsp = {},
   -- hls = { cmd = { 'haskell-language-server-wrapper', '--lsp' } },
 }
 

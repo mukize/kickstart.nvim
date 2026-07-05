@@ -15,12 +15,12 @@ require('catppuccin').setup {
   auto_integrations = true,
   custom_highlights = function(colors)
     return {
-      -- Comment = { fg = colors.flamingo },
-      -- TabLineSel = { bg = colors.pink },
-      -- CmpBorder = { fg = colors.surface2 },
-      -- Pmenu = { bg = colors.none },
       ['@property'] = { fg = colors.sky },
       ['@markup.italic'] = { fg = colors.flamingo },
+      ['yamlBlockString'] = { fg = colors.green },
+      ['@tag'] = { fg = colors.maroon },
+      -- ['@markup.heading'] = { fg = colors.text },
+      ['@markup.link.label'] = { fg = colors.text },
     }
   end,
 }

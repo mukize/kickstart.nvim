@@ -21,6 +21,7 @@ require('catppuccin').setup {
       ['@tag'] = { fg = colors.maroon },
       -- ['@markup.heading'] = { fg = colors.text },
       ['@markup.link.label'] = { fg = colors.text },
+      ['@markup.list.checked'] = { fg = colors.flamingo },
     }
   end,
 }
